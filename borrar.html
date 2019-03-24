@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>InversionesNAT</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style type="text/css">
+        .navbar {
+            background-color: #41B4D0
+        }
+
+        .nav-link {
+            color: #14172E !important;
+            border-color: #41B4D0;
+        }
+
+        body {
+            background-color: #14172E;
+        }
+
+        .form-signin {
+            background-color: white;
+            border-radius: 5%;
+        }
+
+        .tittle-sesion {
+            color: #41B4D0;
+        }
+
+        form label {
+            font-size: 12px !important;
+        }
+
+        .btn-login {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #41B4D0;
+            border-color: #41B4D0;
+        }
+    </style>
+
+</head>
+<body class="text-center">
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-light">
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link " href="#">LinkUp <span class="sr-only">(current)</span></a>
+            </li>
+
+        </ul>
+        <form class="form-inline">
+            <button class="btn btn-outline-light" type="button">Encuesta</button>
+            <button class="btn btn-outline-light ml-2" type="button">Resultados</button>
+        </form>
+    </div>
+</nav>
+
+
+<form class="form-signin mt-5">
+    <div class="ml-2 mr-2">
+        <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class=" tittle-sesion text-justify">Inicia Sesión</h1>
+        <label class="float-left text-justify">Como administrador podras ver los resultados obtenidos en las
+            encuestras</label>
+        <label class="float-left mt-3">Usuario</label>
+        <input type="email" id="inputEmail" class="form-control" required="" autofocus="">
+        <label class="float-left mt-3">Contraseña</label>
+        <input type="password" id="inputPassword" class="form-control" required="">
+        <button class="btn btn-lg btn-primary btn-block mb-4 mt-5 btn-login" type="submit">Sign in</button>
+    </div>
+</form>
+
+
+<!--/.Navbar-->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<style type="text/css">
+    html,
+    body {
+        height: 100%;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 380px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+</style>

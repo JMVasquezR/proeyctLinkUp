@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>InversionesNAT</title>
+
+    <link href="{% static 'bootstrap/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'base.css' %}" rel="stylesheet" type="text/css">
+    {% block css %}
+    {% endblock %}
+
+</head>
+<body class="text-center">
+<!--Navbar-->
+
+<nav class="navbar navbar-expand-lg navbar-light">
+
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <h3 class="nav-link " href="#">LinkUp <span class="sr-only">(current)</span></h3>
+            </li>
+
+        </ul>
+        <form class="form-inline" {% if request.user.is_anonymous %} hidden {% endif %}>
+            <button class="btn btn-outline-light active button-act btn-nav" type="button" data-block="block_encuesta">
+                Encuesta
+            </button>
+            <button class="btn btn-outline-light ml-2 button-act btn-nav" type="button" data-block="block_detalle">
+                Resultados
+            </button>
+
+            <a {% if request.user.is_anonymous %} hidden {% endif %} href="{% url "app-linkup:salida" %}"
+                                                  class="btn btn-outline-light ml-2"
+                                                  style="border-color: black; color:black">Logout
+            </a>
+        </form>
+    </div>
+</nav>
+
+{% block content %}
+{% endblock %}
+
+<!--/.Navbar-->
+
+<script src="{% static 'bootstrap/jquery-3.3.1.slim.min.js' %}"></script>
+<script src="{% static 'bootstrap/popper.min.js' %}"></script>
+<script src="{% static 'bootstrap/bootstrap.min.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="{% static 'base.js' %}"></script>
+{% block js %}
+{% endblock %}
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,122 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+    <link href="{% static 'encuesta.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block js %}
+    <script type="text/javascript"> window.CSRF_TOKEN = "{{ csrf_token }}"; </script>
+    <script src="{% static 'encuesta.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+    <div class="col-sm-12 block" id="block_encuesta">
+        <div class="col-sm-12 text-justify">
+            <h2 class="text-light  mt-2">Encuesta sobre Categorias</h2>
+            <label class="text-light ">Queremos saber cual es tu categoria favorita y por que. Ayudanos a
+                mejorar</label>
+
+        </div>
+
+        <form id="form" class="form-signin" role="form" data-url="{% url "app-linkup:api:encuesta-list" %}"
+              data-url-refresh="{% url "app-linkup:encuesta" %}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <div class="ml-2 mr-2">
+                <label class="float-left mt-3">Nombre completo</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required="" autofocus="">
+                <label class="float-left mt-3">Apellido completo</label>
+                <input type="text" id="apellido" name="apellido" class="form-control" required="">
+                <label class="float-left mt-3">Fecha de nacimiento</label>
+                <input type="Date" id="fecha_de_nacimiento" name="fecha_de_nacimiento" class="form-control" required="">
+                <label class="float-left mt-3">Correo electronico</label>
+                <input type="text" id="correo" name="correo" class="form-control" required="">
+                <label class="float-left mt-3">Tipo de documento</label>
+                <select name="tipo_documento" id="tipo_documento" type="text" class="form-control upper_case" required>
+                    <option value="">--Seleccione--</option>
+                    {% for tipo_documento in ls_tipo_documento %}
+                        <option value="{{ tipo_documento.id }}" {{ tipo_documento.nombre_corto }}>
+                            {{ tipo_documento.nombre_corto }}
+                        </option>
+                    {% endfor %}
+                </select>
+                <label class="float-left mt-3">Numero de Documento</label>
+                <input type="text" id="numero_de_documento" name="numero_de_documento" class="form-control" required="">
+                <label class="float-left mt-3">Categoria</label>
+                <select name="categoria" id="categoria" type="text" class="form-control upper_case" required>
+                    <option value="">--Seleccione--</option>
+                    {% for categoria in ls_categoria %}
+                        <option value="{{ categoria.id }}">
+                            {{ categoria.nombre | capfirst }}
+                        </option>
+                    {% endfor %}
+                </select>
+                {% for categoria in ls_categoria %}
+                    <div class="col-sm-12 container descripcion" id="descripcion_{{ categoria.id }}">
+                        <label class="text-light mt-3">Descripcion</label><br>
+                        <label class="text-light text-justify"
+                               id="descripcion">{{ categoria.descripcion | capfirst }}</label>
+                    </div>
+                {% endfor %}
+                <label class="float-left mt-3">¿Por que?</label>
+                <textarea id="motivo_o_porque" name="motivo_o_porque" class="col-sm-12 mt-2"></textarea>
+
+                <button class="btn btn-lg btn-primary btn-block mb-4 mt-5 btn-login" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-sm-12 block" id="block_detalle">
+        <div class="col-sm-12 text-justify">
+            <h2 class="text-light  mt-2">Bienvenido</h2>
+            <label class="text-light ">A continuación se presentan los resultados de las encuestas</label>
+
+        </div>
+
+        <div class="accordion" id="accordionExample">
+            {% for categoria in ls_encuesta_categoria %}
+                <div class="card">
+                    <div class="card-header" id="id_{{ categoria.categoria__id }}">
+                        <ul class="pl-2 text-justify mb-0">
+                            <li>
+                                <h5 class="text-light  mt-2 ">{{ categoria.categoria__nombre }}</h5>
+                                <label class="text-light" style="width: 100%">{{ categoria.total }} encuestas
+                                    asociadas</label>
+                                <a data-toggle="collapse" data-target="#collapse_{{ categoria.categoria__id }}"
+                                   aria-expanded="false" aria-controls="collapse_{{ categoria.categoria__id }}"
+                                   class="mostrar">
+                                    Mostrar
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div id="collapse_{{ categoria.categoria__id }}" class="collapse container ml-2"
+                         aria-labelledby="id_{{ categoria.categoria__id }}" data-parent="#accordionExample">
+                        <div class="row">
+                            {% for encuesta in ls_encuesta %}
+                                <div class="col-sm-12  contenedor mt-4"
+                                        {% if categoria.categoria__id == encuesta.categoria.id %} show {% else %}
+                                     hidden {% endif %}>
+                                    <div class="col-sm-3 float-left pt-2 text-justify cliente-cont">
+                                        <h5 class="text-body mb-0">{{ encuesta.cliente.nombre }} {{ encuesta.cliente.apellido }}</h5>
+                                        <label>{{ encuesta.cliente.correo }}</label>
+                                        <label>{{ encuesta.cliente.fecha_de_nacimiento }}</label>
+                                        <label>{{ encuesta.cliente.tipo_documento }}: {{ encuesta.cliente.numero_de_documento }}</label>
+                                    </div>
+                                    <div class="col-sm-9 float-left pt-2">
+                                        <h5 class="text-body mb-0">Descripcion</h5>
+                                        <label>{{ encuesta.motivo_o_porque }}</label>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+{% endblock %}
